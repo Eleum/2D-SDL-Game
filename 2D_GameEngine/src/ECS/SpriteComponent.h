@@ -2,13 +2,32 @@
 #include "Components.h"
 #include "SDL.h"
 #include "../TextureManager.h"
+#include "Animation.h"
+#include <map>
+
+/*ЗАВИСИМОСТИ РАЗМЕРОВ ТЕКСТУР:
+
+Здесь: 
+	закомменченные строки
+
+TransformComponent.h: 
+	height + width = реальный размер текстуры
+
+Map.cpp:
+	число в функции LoadMap = коэффициент для координаты tile
+
+TileComponent.h:
+	число в функции init = скейл одного tile
+
+Game.cpp: 
+	число в функции AddTile = размер одного tile (всегда 16, НЕ ТРОГАТЬ!)
+*/
 
 class SpriteComponent : public Component
 {
 private:
 	TransformComponent *transform;
 	SDL_Texture *texture;
-	int tw, th;
 	SDL_Rect srcR, destR;
 
 	bool animated = false;
@@ -16,22 +35,34 @@ private:
 	int speed = 100;
 
 public:
+	int animIndex = 0;
+	std::map<const char*, Animation> animations;
+
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+
 	SpriteComponent() = default;
 	SpriteComponent(const char* path)
 	{
-		/*texture = TextureManager::LoadTexture(path);
-		SDL_QueryTexture(texture, NULL, NULL, &tw, &th);*/
 		setTex(path);
+		//SDL_QueryTexture(texture, NULL, NULL, &tw, &th);
 	}
 
-	SpriteComponent(const char* path, int nFrames, int mSpeed)
-	{
-		/*texture = TextureManager::LoadTexture(path);
-		SDL_QueryTexture(texture, NULL, NULL, &tw, &th);*/
-		animated = true;
-		frames = nFrames;
-		speed = mSpeed;
+	SpriteComponent(const char* path, bool isAnimated)
+	{	
+		animated = isAnimated;
+
+		Animation idle = Animation(0, 10, 100);
+		Animation gesture = Animation(1, 10, 100);
+		Animation walk = Animation(2, 10, 100);
+	
+		animations.emplace("idle", idle);
+		animations.emplace("gesture", gesture);
+		animations.emplace("walk", walk);
+
+		play("idle");
+
 		setTex(path);
+		//SDL_QueryTexture(texture, NULL, NULL, &tw, &th);
 	}
 
 	~SpriteComponent()
@@ -49,9 +80,8 @@ public:
 	    transform = &entity->getComponent<TransformComponent>();
 		
 		srcR.x = srcR.y = 0;
-        srcR.w = tw;//transform->getWidth();
-        srcR.h = th;//transform->getHeigth();
-		
+        srcR.w = transform->getWidth(); //tw
+        srcR.h = transform->getHeigth(); //th		
 	}
 
 	void update() override
@@ -60,24 +90,24 @@ public:
 		{
 			srcR.x = srcR.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
 		}
+
+		srcR.y = animIndex * transform->getHeigth();
+
 		destR.x = static_cast<int>(transform->position.x);
 		destR.y = static_cast<int>(transform->position.y);
-        destR.w = srcR.w * transform->getScale();
-        destR.h = srcR.h * transform->getScale();
+        destR.w = transform->getWidth() * transform->getScale(); //srcR.w
+        destR.h = transform->getHeigth() * transform->getScale(); //srcR.h
 	}
 
 	void draw() override
 	{
-		TextureManager::Draw(texture, srcR, destR);
+		TextureManager::Draw(texture, srcR, destR, spriteFlip);
 	}
 
-	int getHeigth()
+	void play(const char* animName)
 	{
-		return th;
-	}
-
-	int getWidth()
-	{
-		return tw;
+		frames = animations[animName].frames;
+		animIndex = animations[animName].index;
+		speed = animations[animName].speed;
 	}
 };

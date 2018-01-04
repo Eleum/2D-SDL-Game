@@ -6,8 +6,8 @@ class TransformComponent : public Component
 {
 private:
     //TODO: somehow change values of h and w for the values of the pic
-	int height = 16;
-	int width = 16;
+	int height = 32;
+	int width = 32;
 	int scale = 1;
 	int speed = 3;
 

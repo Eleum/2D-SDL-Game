@@ -39,6 +39,9 @@
     <ClCompile Include="src\ECS\ECS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ECS\KeyboardController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ECS\TileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -120,6 +126,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\tiles\grass-round.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\animations\rogue.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

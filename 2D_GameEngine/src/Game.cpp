@@ -11,7 +11,6 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent*> Game::colliders;
 
-//auto& map(manager.addEntity());
 auto& player(manager.addEntity());
 auto& hero(manager.addEntity());
 auto& wall(manager.addEntity());
@@ -60,18 +59,18 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 	//ESC implementations
 
   	player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("assets/PrincessAsya.png");
+    player.addComponent<SpriteComponent>("assets/animations/rogue.png", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
 
-    hero.addComponent<TransformComponent>(60, 0, 2);
-    hero.addComponent<SpriteComponent>("assets/player_idle.png");
+    hero.addComponent<TransformComponent>(60, 0, 1);
+    hero.addComponent<SpriteComponent>("assets/mcu.png");
 	hero.addGroup(groupPlayers);
 
 	Map::LoadMap("assets/test.map", 10, 10);
 
-	wall.addComponent<TransformComponent>(100, 100, 2);
+	wall.addComponent<TransformComponent>(100, 100, 1);
     wall.addComponent<SpriteComponent>("assets/tiles/brickWallBlue.png");
 	wall.addComponent<ColliderComponent>("wall");
 	wall.addGroup(groupMap);
@@ -138,6 +137,6 @@ void Game::clean()
 void Game::AddTile(int id, int x, int y)
 {
     auto& tile(manager.addEntity());
-    tile.addComponent<TileComponent>(x, y, 32, 32, id);
+    tile.addComponent<TileComponent>(x, y, 16, 16, id);
 	tile.addGroup(groupMap);
 }

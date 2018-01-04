@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\ECS\ECS.cpp" />
+    <ClCompile Include="src\ECS\KeyboardController.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
     <ClCompile Include="Src\Game.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Collision.h" />
+    <ClInclude Include="src\ECS\Animation.h" />
     <ClInclude Include="src\ECS\ColliderComponent.h" />
     <ClInclude Include="src\ECS\Components.h" />
     <ClInclude Include="src\ECS\ECS.h" />
@@ -49,6 +51,7 @@
     <None Include="zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\animations\rogue.png" />
     <Image Include="assets\HDIdle.png" />
     <Image Include="assets\mcu.png" />
     <Image Include="assets\PrincessAsya.png" />
@@ -67,6 +70,7 @@
     <ProjectGuid>{3E32D5E3-6A03-475E-90F6-0AD815D8609F}</ProjectGuid>
     <RootNamespace>My2D_GameEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectName>SDL Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
