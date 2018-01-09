@@ -90,6 +90,7 @@
     <None Include="SDL2_image.dll" />
     <None Include="zlib1.dll" />
     <None Include="assets\test.map" />
+    <None Include="assets\map_intro_tilemap.map" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\HDIdle.png">
@@ -129,6 +130,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\animations\rogue.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\map_intro_tileset.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

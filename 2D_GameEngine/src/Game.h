@@ -10,14 +10,8 @@ class ColliderComponent;
 class Game
 {
 public: 
-	Game()
-	{
-
-	}
-	~Game()
-	{
-
-	}
+	Game() {}
+	~Game() {}
 
 	void init(std::string title, int xpos, int ypos, int width, int height, bool fullScreen);
 	
@@ -27,7 +21,7 @@ public:
 	void clean();
 	bool running() { return isRunning; }
 
-    static void AddTile(int id, int x, int y);
+    static void AddTile(int srcX, int srcY, int xpos, int ypos);
 
 	static SDL_Renderer *renderer;
 	static SDL_Event event;

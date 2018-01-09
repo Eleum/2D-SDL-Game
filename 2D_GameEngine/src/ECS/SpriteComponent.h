@@ -89,9 +89,8 @@ public:
 		if (animated)
 		{
 			srcR.x = srcR.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+			srcR.y = animIndex * transform->getHeigth();
 		}
-
-		srcR.y = animIndex * transform->getHeigth();
 
 		destR.x = static_cast<int>(transform->position.x);
 		destR.y = static_cast<int>(transform->position.y);

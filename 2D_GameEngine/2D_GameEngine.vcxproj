@@ -44,6 +44,7 @@
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\map_intro_tilemap.map" />
     <None Include="assets\test.map" />
     <None Include="libpng16-16.dll" />
     <None Include="SDL2.dll" />
@@ -53,6 +54,7 @@
   <ItemGroup>
     <Image Include="assets\animations\rogue.png" />
     <Image Include="assets\HDIdle.png" />
+    <Image Include="assets\map_intro_tileset.png" />
     <Image Include="assets\mcu.png" />
     <Image Include="assets\PrincessAsya.png" />
     <Image Include="assets\tiles\brickWallBlue.png" />

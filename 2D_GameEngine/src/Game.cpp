@@ -15,6 +15,8 @@ auto& player(manager.addEntity());
 auto& hero(manager.addEntity());
 auto& wall(manager.addEntity());
 
+const char* mapFile = "assets/map_intro_tileset.png";
+
 enum groupLabels : std::size_t
 {
 	groupMap,
@@ -58,6 +60,8 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 
 	//ESC implementations
 
+	Map::LoadMap("assets/map_intro_tilemap.map", 25, 25, 2);
+
   	player.addComponent<TransformComponent>(2);
     player.addComponent<SpriteComponent>("assets/animations/rogue.png", true);
 	player.addComponent<KeyboardController>();
@@ -67,13 +71,6 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
     hero.addComponent<TransformComponent>(60, 0, 1);
     hero.addComponent<SpriteComponent>("assets/mcu.png");
 	hero.addGroup(groupPlayers);
-
-	Map::LoadMap("assets/test.map", 10, 10);
-
-	wall.addComponent<TransformComponent>(100, 100, 1);
-    wall.addComponent<SpriteComponent>("assets/tiles/brickWallBlue.png");
-	wall.addComponent<ColliderComponent>("wall");
-	wall.addGroup(groupMap);
 }
 
 void Game::handleEvents()
@@ -95,8 +92,8 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-    SDL_Rect plcl = player.getComponent<ColliderComponent>().collider;
-    SDL_Rect wcl = wall.getComponent<ColliderComponent>().collider;
+    //SDL_Rect plcl = player.getComponent<ColliderComponent>().collider;
+    //SDL_Rect wcl = wall.getComponent<ColliderComponent>().collider;
 
     for (auto cc : colliders)
     {
@@ -134,9 +131,9 @@ void Game::clean()
 	std::cout << "Game cleaned!" << std::endl;
 }
 
-void Game::AddTile(int id, int x, int y)
+void Game::AddTile(int srcX, int srcY, int xpos, int ypos)
 {
     auto& tile(manager.addEntity());
-    tile.addComponent<TileComponent>(x, y, 16, 16, id);
+    tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, mapFile);
 	tile.addGroup(groupMap);
 }
