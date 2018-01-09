@@ -135,5 +135,8 @@
     <Image Include="assets\map_intro_tileset.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\tiles\mcu.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

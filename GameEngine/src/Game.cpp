@@ -69,7 +69,7 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 	player.addGroup(groupPlayers);
 
     hero.addComponent<TransformComponent>(60, 0, 1);
-    hero.addComponent<SpriteComponent>("assets/mcu.png");
+    hero.addComponent<SpriteComponent>("assets/tiles/mcu.png");
 	hero.addGroup(groupPlayers);
 }
 
@@ -93,7 +93,6 @@ void Game::update()
 	manager.update();
 
     //SDL_Rect plcl = player.getComponent<ColliderComponent>().collider;
-    //SDL_Rect wcl = wall.getComponent<ColliderComponent>().collider;
 
     for (auto cc : colliders)
     {
