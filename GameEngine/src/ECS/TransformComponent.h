@@ -22,7 +22,8 @@ public:
 
 	TransformComponent(int _scale)
 	{
-        position.zero();
+		position.x = 400;
+		position.y = 320;
 		scale = _scale;
 	}
 
@@ -55,8 +56,7 @@ public:
 
 	void update() override
 	{
-		position.x += velocity.x * speed;
-		position.y += velocity.y * speed;
+		
 	}
 
 	int getHeigth()
@@ -77,5 +77,10 @@ public:
 	int getScale()
 	{
 		return scale;
+	}
+
+	int getSpeed()
+	{
+		return speed;
 	}
 };

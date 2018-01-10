@@ -87,6 +87,10 @@ public:
 				sprite->play("idle");
 				break;
 			}
+			case SDLK_ESCAPE: 
+			{
+				Game::isRunning = false;
+			}
 			}
 		}
 	}

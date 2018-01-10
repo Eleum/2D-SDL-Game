@@ -11,6 +11,8 @@ SDL_Event Game::event;
 
 std::vector<ColliderComponent*> Game::colliders;
 
+bool Game::isRunning = false;
+
 auto& player(manager.addEntity());
 auto& hero(manager.addEntity());
 auto& wall(manager.addEntity());
@@ -25,6 +27,9 @@ enum groupLabels : std::size_t
 	groupColliders
 };
 
+auto& tiles(manager.getGroup(groupMap));
+auto& players(manager.getGroup(groupPlayers));
+auto& enemies(manager.getGroup(groupEnemies));
 
 void Game::init(std::string title, int xpos, int ypos, int width, int height, bool fullScreen)
 {
@@ -92,17 +97,20 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-    //SDL_Rect plcl = player.getComponent<ColliderComponent>().collider;
+	Vector2D pVel = player.getComponent<TransformComponent>().velocity;
+	int pSpeed = player.getComponent<TransformComponent>().getSpeed();
 
-    for (auto cc : colliders)
+	for (auto t : tiles)
+	{
+		t->getComponent<TileComponent>().destRect.x += -(pVel.x * pSpeed);
+		t->getComponent<TileComponent>().destRect.y += -(pVel.y * pSpeed);
+	}
+   
+	/*for (auto cc : colliders)
     {
         Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-    }
+    }*/
 }
-
-auto& tiles(manager.getGroup(groupMap));
-auto& players(manager.getGroup(groupPlayers));
-auto& enemies(manager.getGroup(groupEnemies));
 
 void Game::render()
 {
