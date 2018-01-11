@@ -92,8 +92,8 @@ public:
 			srcR.y = animIndex * transform->getHeigth();
 		}
 
-		destR.x = static_cast<int>(transform->position.x);
-		destR.y = static_cast<int>(transform->position.y);
+		destR.x = static_cast<int>(transform->position.x) - Game::camera.x;
+		destR.y = static_cast<int>(transform->position.y) - Game::camera.y;
         destR.w = transform->getWidth() * transform->getScale(); //srcR.w
         destR.h = transform->getHeigth() * transform->getScale(); //srcR.h
 	}

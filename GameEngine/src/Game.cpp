@@ -7,7 +7,11 @@ Manager manager;
 Map *map;
 
 SDL_Renderer* Game::renderer = nullptr;
+
 SDL_Event Game::event;
+
+//last two numbers are the actual size of map (25x16px)
+SDL_Rect Game::camera = { 0, 0, 400, 400 }; 
 
 std::vector<ColliderComponent*> Game::colliders;
 
@@ -97,19 +101,23 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	Vector2D pVel = player.getComponent<TransformComponent>().velocity;
-	int pSpeed = player.getComponent<TransformComponent>().getSpeed();
+	//minus half of screen's dimensions to make player to be in the middle
+	camera.x = player.getComponent<TransformComponent>().position.x - 200; 
+	camera.y = player.getComponent<TransformComponent>().position.y - 200;
 
-	for (auto t : tiles)
-	{
-		t->getComponent<TileComponent>().destRect.x += -(pVel.x * pSpeed);
-		t->getComponent<TileComponent>().destRect.y += -(pVel.y * pSpeed);
-	}
-   
-	/*for (auto cc : colliders)
-    {
-        Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
-    }*/
+	/*std::cout << "Camera X: " << camera.x << std::endl;
+	std::cout << "Player X: " << player.getComponent<TransformComponent>().position.x << std::endl;
+	std::cout << "Camera Y: " << camera.y << std::endl;
+	std::cout << "Player Y: " << player.getComponent<TransformComponent>().position.y << std::endl;*/
+
+	if (camera.x < 0) 
+		camera.x = 0;
+	if (camera.y < 0)
+		camera.y = 0;
+	if (camera.x > camera.w)
+		camera.x = camera.w;
+	if (camera.y > camera.h)
+		camera.y = camera.h;
 }
 
 void Game::render()

@@ -6,6 +6,7 @@ class TransformComponent : public Component
 {
 private:
     //TODO: somehow change values of h and w for the values of the pic
+	//do i really need to do this tho...
 	int height = 32;
 	int width = 32;
 	int scale = 1;
@@ -22,8 +23,8 @@ public:
 
 	TransformComponent(int _scale)
 	{
-		position.x = 400;
-		position.y = 320;
+		position.x = 45;
+		position.y = 55;
 		scale = _scale;
 	}
 
@@ -56,7 +57,8 @@ public:
 
 	void update() override
 	{
-		
+		position.x += velocity.x * speed;
+		position.y += velocity.y * speed;
 	}
 
 	int getHeigth()
