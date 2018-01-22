@@ -138,5 +138,8 @@
     <Image Include="assets\tiles\mcu.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\CollisionTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

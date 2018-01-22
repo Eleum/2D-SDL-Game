@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\animations\rogue.png" />
+    <Image Include="assets\CollisionTexture.png" />
     <Image Include="assets\HDIdle.png" />
     <Image Include="assets\map_intro_tileset.png" />
     <Image Include="assets\mcu.png" />

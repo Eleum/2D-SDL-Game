@@ -1,8 +1,16 @@
 #include <fstream>
 #include "Map.h"
 #include "Game.h"
+#include "ECS/ECS.h"
+#include "ECS/Components.h"
 
-Map::Map() {}
+extern Manager manager;
+
+Map::Map(const char* mapFilePath, int mapScale, int tileSize) : _mapFilePath(mapFilePath), 
+_mapScale(mapScale), _tileSize(tileSize) 
+{
+	_scaledSize = tileSize * mapScale;
+}
 
 void Map::LoadMap(std::string path, int sizeX, int sizeY, int layerCount)
 {
@@ -25,14 +33,37 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY, int layerCount)
 					mapFile.ignore();
 					continue;
 				}
-				srcY = atoi(&c) * 16;
+				srcY = atoi(&c) * _tileSize;
 				mapFile.get(c);
-				srcX = atoi(&c) * 16;
+				srcX = atoi(&c) * _tileSize;
 				//the bigger the number - the bigger the space between cells
-				Game::AddTile(srcX, srcY, x * 32, y * 32);
+				AddTile(srcX, srcY, x * _scaledSize, y * _scaledSize);
 				mapFile.ignore();
 			}
 		}
 	}
+
+	for (int y = 0; y < sizeY; y++)
+	{
+		for (int x = 0; x < sizeX; x++)
+		{
+			mapFile.get(c);
+			if (c == '1')
+			{
+				auto& tcol(manager.addEntity());
+				tcol.addComponent<ColliderComponent>("terrain", x * _scaledSize, y * _scaledSize, _scaledSize);
+				tcol.addGroup(Game::groupColliders);
+			}
+			mapFile.ignore();
+		}
+	}
+
     mapFile.close();
+}
+
+void Map::AddTile(int srcX, int srcY, int xpos, int ypos)
+{
+	auto& tile(manager.addEntity());
+	tile.addComponent<TileComponent>(srcX, srcY, xpos, ypos, _tileSize, _mapScale, _mapFilePath);
+	tile.addGroup(Game::groupMap);
 }

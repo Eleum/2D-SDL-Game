@@ -12,7 +12,7 @@ public:
 	 
 	TileComponent() = default;
 
-    TileComponent(int srcX, int srcY, int xpos, int ypos, const char* path)
+    TileComponent(int srcX, int srcY, int xpos, int ypos, int tsize, int tscale, const char* path)
     {
 		texture = TextureManager::LoadTexture(path);
 
@@ -21,11 +21,11 @@ public:
 
 		srcRect.x = srcX;
 		srcRect.y = srcY;
-		srcRect.w = srcRect.h = 16;
+		srcRect.w = srcRect.h = tsize;
 
 		destRect.x = xpos;
 		destRect.y = ypos;
-		destRect.w = destRect.h = 32; //onscreen size of a tile
+		destRect.w = destRect.h = tsize * tscale; //onscreen size of a tile
     }
 
 	~TileComponent()
