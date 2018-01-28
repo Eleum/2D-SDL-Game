@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AssetManager.cpp" />
     <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\ECS\ECS.cpp" />
     <ClCompile Include="src\ECS\KeyboardController.cpp" />
@@ -29,12 +30,14 @@
     <ClCompile Include="src\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AssetManager.h" />
     <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\ECS\Animation.h" />
     <ClInclude Include="src\ECS\ColliderComponent.h" />
     <ClInclude Include="src\ECS\Components.h" />
     <ClInclude Include="src\ECS\ECS.h" />
     <ClInclude Include="src\ECS\KeyboardController.h" />
+    <ClInclude Include="src\ECS\ProjectileComponent.h" />
     <ClInclude Include="src\ECS\TileComponent.h" />
     <ClInclude Include="src\ECS\TransformComponent.h" />
     <ClInclude Include="src\ECS\SpriteComponent.h" />
@@ -58,6 +61,7 @@
     <Image Include="assets\map_intro_tileset.png" />
     <Image Include="assets\mcu.png" />
     <Image Include="assets\PrincessAsya.png" />
+    <Image Include="assets\Projectile.png" />
     <Image Include="assets\tiles\brickWallBlue.png" />
     <Image Include="assets\tiles\brickWallRed.png" />
     <Image Include="assets\tiles\brickWallTopBlue.png" />
@@ -130,10 +134,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2_image-2.0.1\include;D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\include;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>

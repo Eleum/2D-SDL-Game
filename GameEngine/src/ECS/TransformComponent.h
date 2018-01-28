@@ -23,8 +23,8 @@ public:
 
 	TransformComponent(int _scale)
 	{
-		position.x = 96;
-		position.y = 64;
+		position.x = 260;
+		position.y = 260;
 		scale = _scale;
 	}
 

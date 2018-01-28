@@ -42,6 +42,9 @@
     <ClCompile Include="src\ECS\KeyboardController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\AssetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h">
@@ -81,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ECS\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AssetManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS\ProjectileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,6 +148,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\CollisionTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\Projectile.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

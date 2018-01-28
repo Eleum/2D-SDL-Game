@@ -13,6 +13,8 @@ SDL_Event Game::event;
 //last two numbers are the actual size of map (25x16px)
 SDL_Rect Game::camera = { 0, 0, 400, 400 }; 
 
+AssetManager* Game::assets = new AssetManager(&manager);
+
 bool Game::isRunning = false;
 
 auto& player(manager.addEntity());
@@ -48,15 +50,18 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
-	map = new Map("assets/map_intro_tileset.png", 2, 16);
+	assets->AddTexture("terrain", "assets/map_intro_tileset.png"); 
+	assets->AddTexture("player", "assets/animations/rogue.png");
+	assets->AddTexture("projectile", "assets/Projectile.png");
+
+	map = new Map("terrain", 2, 16);
 
 	//ESC implementations
 
 	map->LoadMap("assets/map_intro_tilemap.map", 25, 25, 2);
 
   	player.addComponent<TransformComponent>(2);
-	//player.addComponent<SpriteComponent>("assets/animations/rogue.png", true);
-	player.addComponent<SpriteComponent>("assets/CollisionTexture.png");
+	player.addComponent<SpriteComponent>("player", true);
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 	player.addGroup(groupPlayers);
@@ -64,11 +69,17 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
     hero.addComponent<TransformComponent>(60, 0, 1);
     hero.addComponent<SpriteComponent>("assets/tiles/mcu.png");
 	hero.addGroup(groupPlayers);
+
+	assets->CreateProjectile(Vector2D(200, 100), Vector2D(2, 0), 200, 2, "projectile");
+	assets->CreateProjectile(Vector2D(200, 200), Vector2D(2, 0), 200, 2, "projectile");
+	assets->CreateProjectile(Vector2D(200, 250), Vector2D(2, 1), 200, 2, "projectile");
+	assets->CreateProjectile(Vector2D(200, 300), Vector2D(2, -1), 200, 2, "projectile");
 }
 
 auto& tiles(manager.getGroup(Game::groupMap));
 auto& players(manager.getGroup(Game::groupPlayers));
 auto& colliders(manager.getGroup(Game::groupColliders));
+auto& projectiles(manager.getGroup(Game::groupProjectiles));
 
 void Game::handleEvents()
 {
@@ -101,14 +112,18 @@ void Game::update()
 		}
 	}
 
+	for (auto& p : projectiles)
+	{
+		if (Collision::AABB(player.getComponent<ColliderComponent>().collider, p->getComponent<ColliderComponent>().collider))
+		{
+			std::cout << "hit the player" << std::endl;
+			p->destroy();
+		}
+	}
+
 	//minus half of screen's dimensions to make player to be in the middle
 	camera.x = player.getComponent<TransformComponent>().position.x - 200; 
 	camera.y = player.getComponent<TransformComponent>().position.y - 200;
-
-	/*std::cout << "Camera X: " << camera.x << std::endl;
-	std::cout << "Player X: " << player.getComponent<TransformComponent>().position.x << std::endl;
-	std::cout << "Camera Y: " << camera.y << std::endl;
-	std::cout << "Player Y: " << player.getComponent<TransformComponent>().position.y << std::endl;*/
 
 	if (camera.x < 0) 
 		camera.x = 0;
@@ -137,6 +152,11 @@ void Game::render()
 	for (auto& c : colliders)
 	{
 		c->draw();
+	}
+
+	for (auto& p : projectiles)
+	{
+		p->draw();
 	}
 
 	SDL_RenderPresent(renderer);
