@@ -41,6 +41,7 @@
     <ClInclude Include="src\ECS\TileComponent.h" />
     <ClInclude Include="src\ECS\TransformComponent.h" />
     <ClInclude Include="src\ECS\SpriteComponent.h" />
+    <ClInclude Include="src\ECS\UILabel.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\Vector2D.h" />
     <ClInclude Include="Src\Game.h" />
@@ -126,19 +127,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\БГУИР учеба\Прога\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\include;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\include;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\include;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_ttf-2.0.14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_image-2.0.1\lib\x86;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2\lib\x86;E:\BSUIR study\Programming\Visual Studio\SDLDev\SDL2_ttf-2.0.14\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

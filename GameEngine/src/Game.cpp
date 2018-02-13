@@ -1,3 +1,4 @@
+#include <sstream>
 #include "Game.h"
 #include "Collision.h"
 #include "ECS/Components.h"
@@ -19,6 +20,7 @@ bool Game::isRunning = false;
 
 auto& player(manager.addEntity());
 auto& hero(manager.addEntity());
+auto& label(manager.addEntity());
 
 void Game::init(std::string title, int xpos, int ypos, int width, int height, bool fullScreen)
 {
@@ -50,9 +52,16 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
+	if (TTF_Init() == -1)
+	{
+		std::cout << "Error: SDL_TTF" << std::endl;
+	}
+
 	assets->AddTexture("terrain", "assets/map_intro_tileset.png"); 
 	assets->AddTexture("player", "assets/animations/rogue.png");
 	assets->AddTexture("projectile", "assets/Projectile.png");
+
+	assets->AddFont("arial", "assets/arial.ttf", 16);
 
 	map = new Map("terrain", 2, 16);
 
@@ -69,6 +78,9 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
     hero.addComponent<TransformComponent>(60, 0, 1);
     hero.addComponent<SpriteComponent>("assets/tiles/mcu.png");
 	hero.addGroup(groupPlayers);
+
+	SDL_Color white = { 255, 255, 255 };
+	label.addComponent<UILabel>(10, 10, "test string", "arial", white);
 
 	assets->CreateProjectile(Vector2D(200, 100), Vector2D(2, 0), 200, 2, "projectile");
 	assets->CreateProjectile(Vector2D(200, 200), Vector2D(2, 0), 200, 2, "projectile");
@@ -100,6 +112,10 @@ void Game::update()
 	SDL_Rect playerCollider = player.getComponent<ColliderComponent>().collider;
 	Vector2D playerPosition = player.getComponent<TransformComponent>().position;
 	
+	std::stringstream ss;
+	ss << "Player position: " << playerPosition;
+	label.getComponent<UILabel>().SetLabelText(ss.str(), "arial");
+
 	manager.refresh();
 	manager.update();
 
@@ -149,15 +165,17 @@ void Game::render()
 		p->draw();
 	}
 	
-	for (auto& c : colliders)
+	/*for (auto& c : colliders)
 	{
 		c->draw();
-	}
+	}*/
 
 	for (auto& p : projectiles)
 	{
 		p->draw();
 	}
+
+	label.draw();
 
 	SDL_RenderPresent(renderer);
 }
